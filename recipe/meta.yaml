@@ -1,26 +1,22 @@
-{% set name = "pybroom" %}
 {% set version = "0.2" %}
-{% set sha256 = "45761b81e64556a8a649f4561cdc2f102a269aff114e23dc93081762724cd123" %}
 
 package:
-  name: {{ name|lower }}
+  name: pybroom
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://github.com/tritemio/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://github.com/tritemio/pybroom/archive/{{ version }}.tar.gz
+  sha256: 45761b81e64556a8a649f4561cdc2f102a269aff114e23dc93081762724cd123
 
 build:
+  number: 1001
   skip: true  # [py2k]
-  number: 1000
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
   build:
     - python
-    - setuptools
-
+    - pip
   run:
     - python
     - pandas
